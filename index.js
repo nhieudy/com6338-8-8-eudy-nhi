@@ -15,10 +15,17 @@ form.onsubmit = function (e) {
     .then(function (data) {
       displayWeather(data);
       console.log(data);
-    });
+    })
+    .catch(function (err){
+     var wrong = document.createElement("h2");
+  wrong.textContent = "Location not found"
+  section.appendChild(wrong);
+    })
 };
 
 function displayWeather(data) {
+  form.reset();
+  section.innerHTML = ''
   console.log(data.name);
   console.log(data.sys.country);
 
@@ -36,7 +43,6 @@ function displayWeather(data) {
     "," +
     data.coord.lon;
   section.appendChild(a);
-  form.reset();
 
   //Create weather icon
   var icon = document.createElement("img");
@@ -61,12 +67,12 @@ function displayWeather(data) {
   section.appendChild(feelTemp);
 
   //Create Time
-var timeCollect = document.createElement("p");
-var date = new Date(data.dt*1000) //Multiplay to get to milliseconds
-var timeString = date.toLocaleTimeString('en-US', {
-  hour: 'numeric',
-  minute: '2-digit'
-})
+  var timeCollect = document.createElement("p");
+  var date = new Date(data.dt * 1000); //Multiplay to get to milliseconds
+  var timeString = date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+  });
   timeCollect.textContent = "Last updated: " + timeString;
   section.appendChild(timeCollect);
 }
