@@ -40,6 +40,33 @@ function displayWeather(data) {
 
   //Create weather icon
   var icon = document.createElement("img");
-  icon.src = 'https://openweathermap.org/img/wn/' + data.weather[0].icon + '@2x.png';
+  icon.src =
+    "https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
   section.appendChild(icon);
+
+  //Create description
+  var description = document.createElement("p");
+  description.textContent = data.weather[0].description;
+  description.style.textTransform = "capitalize";
+  section.appendChild(description);
+
+  //Create actual like
+  var temp = document.createElement("p");
+  temp.textContent = "Current: " + data.main.temp;
+  section.appendChild(temp);
+
+  //Create feel like
+  var feelTemp = document.createElement("p");
+  feelTemp.textContent = "Feels like: " + data.main.feels_like;
+  section.appendChild(feelTemp);
+
+  //Create Time
+var timeCollect = document.createElement("p");
+var date = new Date(data.dt*1000) //Multiplay to get to milliseconds
+var timeString = date.toLocaleTimeString('en-US', {
+  hour: 'numeric',
+  minute: '2-digit'
+})
+  timeCollect.textContent = "Last updated: " + timeString;
+  section.appendChild(timeCollect);
 }
