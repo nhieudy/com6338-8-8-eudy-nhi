@@ -3,12 +3,12 @@ var form = document.querySelector("form");
 var section = document.getElementById("weather");
 
 //get the data from open weather map
-var URL =
+var url =
   "https://api.openweathermap.org/data/2.5/weather?units=imperial&appid=61ac71fca852832313e86693bf383076&q=";
 form.onsubmit = function (e) {
   e.preventDefault();
   var city = this.search.value;
-  fetch(URL + city)
+  fetch(url + city)
     .then(function (res) {
       return res.json();
     })
@@ -16,16 +16,16 @@ form.onsubmit = function (e) {
       displayWeather(data);
       console.log(data);
     })
-    .catch(function (err){
-     var wrong = document.createElement("h2");
-  wrong.textContent = "Location not found"
-  section.appendChild(wrong);
-    })
+    .catch(function (err) {
+      var wrong = document.createElement("h2");
+      wrong.textContent = "Location not found";
+      section.appendChild(wrong);
+    });
 };
 
 function displayWeather(data) {
   form.reset();
-  section.innerHTML = ''
+  section.innerHTML = "";
   console.log(data.name);
   console.log(data.sys.country);
 
